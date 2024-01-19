@@ -1,0 +1,14 @@
+site:
+  title: "Compass"
+
+server:
+  files:
+    dev:
+      contentRoot: "build/processedResources/js/main/public"
+      script: "build/dist/js/developmentExecutable/bgitucompass.js"
+      api: "build/libs/bgitucompass.jar"
+    prod:
+      script: "build/dist/js/productionExecutable/bgitucompass.js"
+      siteRoot: ".kobweb/site"
+
+  port: 8080
