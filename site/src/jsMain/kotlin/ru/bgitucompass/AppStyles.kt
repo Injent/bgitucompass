@@ -1,24 +1,23 @@
 package ru.bgitucompass
 
-import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.css.CSSTransition
+import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
-import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.layout.HorizontalDividerStyle
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
-import com.varabyte.kobweb.silk.components.style.addVariantBase
-import com.varabyte.kobweb.silk.components.style.base
+import com.varabyte.kobweb.silk.components.style.ariaDisabled
+import com.varabyte.kobweb.silk.components.style.hover
+import com.varabyte.kobweb.silk.components.style.not
 import com.varabyte.kobweb.silk.init.InitSilk
 import com.varabyte.kobweb.silk.init.InitSilkContext
 import com.varabyte.kobweb.silk.init.registerStyleBase
-import com.varabyte.kobweb.silk.theme.colors.palette.color
-import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
+import com.varabyte.kobweb.silk.theme.modifyComponentStyle
 import com.varabyte.kobweb.silk.theme.modifyComponentStyleBase
-import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.percent
+import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
+import ru.bgitucompass.theme.Fonts
 
 @InitSilk
 fun initSiteStyles(ctx: InitSilkContext) {
@@ -36,26 +35,58 @@ fun initSiteStyles(ctx: InitSilkContext) {
     ctx.theme.modifyComponentStyleBase(HorizontalDividerStyle) {
         Modifier.fillMaxWidth()
     }
+    ctx.theme.modifyComponentStyle(ButtonStyle) {
+        (hover + not(ariaDisabled)) {
+            Modifier
+        }
+    }
 }
 
-val HeadlineTextStyle by ComponentStyle.base {
-    Modifier
-        .fontSize(3.cssRem)
-        .textAlign(TextAlign.Start)
-        .lineHeight(1.2) //1.5x doesn't look as good on very large text
+val IconButtonStyle by ComponentStyle {
+    base {
+        Modifier
+            .backgroundColor(SitePalettes.light.blue)
+            .transition(
+                CSSTransition(property = "background-color", duration = 300.ms)
+            )
+    }
+
+    (hover + not(ariaDisabled)) {
+        Modifier
+            .backgroundColor(SitePalettes.light.cobalt)
+            .transition(
+                CSSTransition(property = "background-color", duration = 300.ms)
+            )
+    }
 }
 
-val SubheadlineTextStyle by ComponentStyle.base {
-    Modifier
-        .fontSize(1.cssRem)
-        .textAlign(TextAlign.Start)
-        .color(colorMode.toPalette().color.toRgb().copyf(alpha = 0.8f))
+val BodyTextStyle by ComponentStyle {
+    base {
+        Modifier
+            .fontFamily(Fonts.ALSHAUSS)
+            .fontSize(20.px)
+            .fontWeight(FontWeight.Normal)
+            .color(SitePalettes.light.blackText)
+    }
 }
 
-val CircleButtonVariant by ButtonStyle.addVariantBase {
-    Modifier.padding(0.px).borderRadius(50.percent)
+val SmallHeadlineTextStyle by ComponentStyle {
+    base {
+        Modifier
+            .fontFamily(Fonts.ALSHAUSS)
+            .fontWeight(FontWeight.Bold)
+            .fontSize(24.px)
+            .lineHeight(1.2)
+            .color(SitePalettes.light.blackText)
+    }
 }
 
-val UncoloredButtonVariant by ButtonStyle.addVariantBase {
-    Modifier.setVariable(ButtonVars.BackgroundDefaultColor, Colors.Transparent)
+val MediumHeadline by ComponentStyle {
+    base {
+        Modifier
+            .fontFamily(Fonts.ALSHAUSS)
+            .fontWeight(FontWeight.Medium)
+            .fontSize(32.px)
+            .color(SitePalettes.light.blackText)
+    }
 }
