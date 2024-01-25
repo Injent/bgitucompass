@@ -30,6 +30,7 @@ import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.keywords.auto
 import org.jetbrains.compose.web.dom.*
 import ru.bgitucompass.*
+import ru.bgitucompass.components.sections.Footer
 import ru.bgitucompass.components.sections.NavBar
 import ru.bgitucompass.components.sections.UiPreviewSection
 import ru.bgitucompass.components.widgets.IconButton
@@ -50,7 +51,7 @@ fun HomePage() {
             .minHeight(100.percent)
             .background(colors.background)
     ) {
-        NavBar {  }
+        NavBar()
 
         val breakpoint = rememberBreakpoint()
         SimpleGrid(
@@ -74,6 +75,8 @@ fun HomePage() {
         UiPreviewSection()
         WhatNext()
         Questions()
+
+        Footer()
     }
 }
 

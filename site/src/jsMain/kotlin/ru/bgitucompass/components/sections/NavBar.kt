@@ -2,8 +2,8 @@ package ru.bgitucompass.components.sections
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.functions.blur
+import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Row
-import com.varabyte.kobweb.compose.foundation.layout.RowScope
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
@@ -19,11 +19,12 @@ import ru.bgitucompass.theme.Fonts
 import ru.bgitucompass.toSitePalette
 
 @Composable
-fun NavBar(content: @Composable RowScope.() -> Unit) {
+fun NavBar() {
     val colors = ColorMode.current.toSitePalette()
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .position(Position.Fixed)
             .top(0.px)
@@ -42,13 +43,12 @@ fun NavBar(content: @Composable RowScope.() -> Unit) {
         P(
             Modifier
                 .color(colors.blue)
-                .fontSize(32.px)
+                .fontSize(24.px)
                 .fontFamily(Fonts.ERMILOV)
                 .margin(left = 8.px, right = 16.px)
                 .toAttrs()
         ) {
             Text("БГИТУ Компас")
         }
-        content()
     }
 }

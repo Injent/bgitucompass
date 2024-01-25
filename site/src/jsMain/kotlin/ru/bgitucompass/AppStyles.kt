@@ -3,6 +3,7 @@ package ru.bgitucompass
 import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
@@ -117,5 +118,18 @@ val MediumHeadline by ComponentStyle {
             .fontSize(32.px)
             .color(SitePalettes.light.blackText)
             .margin(0.px)
+    }
+}
+
+val FooterLinkTextStyle by ComponentStyle {
+    base {
+        Modifier
+            .fontFamily(Fonts.ALSHAUSS)
+            .fontWeight(FontWeight.Medium)
+            .fontSize(18.px)
+            .lineHeight(1.0)
+            .color(SitePalettes.light.blue)
+            .margin(0.px)
+            .textDecorationLine(TextDecorationLine.None)
     }
 }
