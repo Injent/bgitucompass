@@ -353,10 +353,7 @@ private fun LeftSide() {
 
     Column(
         modifier = Modifier
-            .then(
-                if (breakpoint > Breakpoint.MD) Modifier.fillMaxSize()
-                else Modifier.fillMaxWidth().height(auto)
-            ),
+            .fillMaxSize(),
         verticalArrangement = if (breakpoint > Breakpoint.MD) Arrangement.Center else Arrangement.Top
     ) {
         H1(
@@ -386,7 +383,7 @@ private fun LeftSide() {
                 )
         ) {
             IconButton(
-                onClick = { ctx.router.navigateTo("https://api.bgitu-compass.ru/download") },
+                onClick = { ctx.router.navigateTo("https://bgitu-compass.ru/download") },
             ) {
                 P(
                     Modifier
