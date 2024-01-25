@@ -2,6 +2,7 @@ package ru.bgitucompass
 
 import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.FontWeight
+import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
@@ -60,6 +61,18 @@ val IconButtonStyle by ComponentStyle {
     }
 }
 
+val Title1TextStyle by ComponentStyle {
+    base {
+        Modifier
+            .color(SitePalettes.light.blackText)
+            .fontFamily(Fonts.ALSHAUSS)
+            .fontWeight(FontWeight.Bold)
+            .fontSize(64.px)
+            .lineHeight(1.0)
+            .margin(0.px)
+    }
+}
+
 val BodyTextStyle by ComponentStyle {
     base {
         Modifier
@@ -67,6 +80,9 @@ val BodyTextStyle by ComponentStyle {
             .fontSize(20.px)
             .fontWeight(FontWeight.Normal)
             .color(SitePalettes.light.blackText)
+            .textAlign(TextAlign.Justify)
+            .lineHeight(1.4)
+            .margin(0.px)
     }
 }
 
@@ -76,8 +92,20 @@ val SmallHeadlineTextStyle by ComponentStyle {
             .fontFamily(Fonts.ALSHAUSS)
             .fontWeight(FontWeight.Bold)
             .fontSize(24.px)
-            .lineHeight(1.2)
+            .lineHeight(1.0)
             .color(SitePalettes.light.blackText)
+            .margin(0.px)
+    }
+}
+
+val Headline2TextStyle by ComponentStyle {
+    base {
+        Modifier
+            .fontFamily(Fonts.ALSHAUSS)
+            .fontWeight(FontWeight.Medium)
+            .fontSize(24.px)
+            .color(SitePalettes.light.blackText)
+            .margin(0.px)
     }
 }
 
@@ -88,5 +116,6 @@ val MediumHeadline by ComponentStyle {
             .fontWeight(FontWeight.Medium)
             .fontSize(32.px)
             .color(SitePalettes.light.blackText)
+            .margin(0.px)
     }
 }

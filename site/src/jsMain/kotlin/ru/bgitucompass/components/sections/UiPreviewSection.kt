@@ -9,11 +9,13 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.thenIf
+import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toAttrs
+import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.jetbrains.compose.web.css.keywords.auto
 import org.jetbrains.compose.web.css.percent
@@ -27,9 +29,9 @@ import ru.bgitucompass.SmallHeadlineTextStyle
 fun ColumnScope.UiPreviewSection() {
     val breakpoint = rememberBreakpoint()
     SimpleGrid(
-        numColumns = numColumns(1, 2),
+        numColumns = numColumns(base = 1, md = 2),
         modifier = Modifier
-            .margin(top = 64.px)
+            .margin(top = 32.px)
             .align(Alignment.CenterHorizontally)
             .fillMaxWidth(
                 if (breakpoint <= Breakpoint.MD) 100.percent
@@ -38,19 +40,25 @@ fun ColumnScope.UiPreviewSection() {
             .thenIf(breakpoint <= Breakpoint.MD) { Modifier.height(auto) }
             .thenIf(breakpoint > Breakpoint.MD) { Modifier.height(100.vh) }
             .padding(
-                if (breakpoint <= Breakpoint.MD) 0.px else 32.px
+                if (breakpoint <= Breakpoint.MD) 24.px else 32.px
             )
             .scrollBehavior(ScrollBehavior.Smooth)
     ) {
         WidgetLeftSide()
         WidgetRightSide()
-        NotificationLeftSide()
-        NotificationRightSide()
+        if (breakpoint <= Breakpoint.MD) {
+            NotificationRightSide()
+            NotificationLeftSide()
+        } else {
+            NotificationLeftSide()
+            NotificationRightSide()
+        }
     }
 }
 
 @Composable
 private fun NotificationLeftSide() {
+    val breakpoint = rememberBreakpoint()
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -58,11 +66,16 @@ private fun NotificationLeftSide() {
     ) {
         Column(
             Modifier
-                .maxWidth(70.percent)
+                .width(
+                    if (breakpoint <= Breakpoint.MD) 100.percent else 70.percent
+                )
+                .margin(bottom = 32.px)
                 .align(Alignment.Center)
         ) {
             H3(
                 SmallHeadlineTextStyle
+                    .toModifier()
+                    .margin(top = 24.px, bottom = 12.px)
                     .toAttrs()
             ) {
                 Text("Мгновенный просмотр расписания")
@@ -84,6 +97,7 @@ private fun NotificationRightSide() {
     Box(
         Modifier
             .fillMaxWidth()
+            .margin(top = 64.px)
             .height(auto)
     ) {
         Image(
@@ -120,6 +134,8 @@ private fun WidgetLeftSide() {
 
 @Composable
 private fun WidgetRightSide() {
+    val breakpoint = rememberBreakpoint()
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -127,11 +143,15 @@ private fun WidgetRightSide() {
     ) {
         Column(
             Modifier
-                .maxWidth(70.percent)
+                .width(
+                    if (breakpoint <= Breakpoint.MD) 100.percent else 70.percent
+                )
                 .align(Alignment.Center)
         ) {
             H3(
                 SmallHeadlineTextStyle
+                    .toModifier()
+                    .margin(top = 24.px, bottom = 12.px)
                     .toAttrs()
             ) {
                 Text("Кастомизируемые виджеты")

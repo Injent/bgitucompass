@@ -29,15 +29,12 @@ import kotlinx.browser.document
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.keywords.auto
 import org.jetbrains.compose.web.dom.*
-import ru.bgitucompass.BodyTextStyle
-import ru.bgitucompass.MediumHeadline
-import ru.bgitucompass.SitePalettes
+import ru.bgitucompass.*
 import ru.bgitucompass.components.sections.NavBar
 import ru.bgitucompass.components.sections.UiPreviewSection
 import ru.bgitucompass.components.widgets.IconButton
 import ru.bgitucompass.theme.Dimens
 import ru.bgitucompass.theme.Fonts
-import ru.bgitucompass.toSitePalette
 
 @Page
 @Composable
@@ -75,14 +72,8 @@ fun HomePage() {
         }
         InfoSection()
         UiPreviewSection()
-        WhatNext(
-            modifier = Modifier
-                .margin(top = if (breakpoint <= Breakpoint.MD) 64.px else 0.px)
-        )
-        Questions(
-            modifier = Modifier
-                .margin(top = if (breakpoint <= Breakpoint.MD) 64.px else 0.px)
-        )
+        WhatNext()
+        Questions()
     }
 }
 
@@ -99,7 +90,8 @@ private fun Question(
             BodyTextStyle
                 .toModifier()
                 .fontWeight(FontWeight.Bold)
-                .fillMaxWidth(80.percent)
+                .fillMaxWidth()
+                .textAlign(TextAlign.Left)
                 .toAttrs()
         ) {
             Text(ask)
@@ -108,7 +100,7 @@ private fun Question(
             BodyTextStyle
                 .toModifier()
                 .margin(top = 8.px)
-                .fillMaxWidth(80.percent)
+                .fillMaxWidth()
                 .toAttrs()
         ) {
             Text(response)
@@ -134,6 +126,7 @@ private fun Questions(
                     other = Modifier.margin(topBottom = 32.px)
                 )
                 .align(Alignment.CenterHorizontally)
+                .lineHeight(1.0)
                 .toAttrs()
         ) {
             Text("Часто задаваемые вопросы")
@@ -146,21 +139,28 @@ private fun Questions(
                 .align(Alignment.CenterHorizontally)
                 .height(auto)
                 .maxWidth(1500.px)
-                .thenIf(condition = breakpoint <= Breakpoint.MD, other = Modifier.gap(32.px))
+                .gap(64.px)
                 .padding(32.px),
         ) {
-            val mod = Modifier
+            val itemModifier = Modifier
                 .fillMaxSize()
                 .align(Alignment.CenterHorizontally)
             Question(
                 ask = "Будет ли приложение для IPhone?",
                 response = "К сожалению нет, у нас нет техники Apple и мы не можем разрабатывать под IPhone",
-                modifier = mod
+                modifier = itemModifier
             )
             Question(
                 ask = "Есть ли у приложения регулярные обновления?",
                 response = "Да, каждое обновление содержит новые полезные функции для наших пользователей",
-                modifier = mod
+                modifier = itemModifier
+            )
+            Question(
+                ask = "Почему приложения нет в маркетах?",
+                response = "Санкции против России делают невозможным публикацию приложения в Google Play. " +
+                        "Почему же мы не рассматриваем платформу Rustore? " +
+                        "Потому что по многочисленным отзывам им никто не пользуется",
+                modifier = itemModifier
             )
         }
     }
@@ -186,11 +186,9 @@ private fun Ca(
                 .size(72.px)
         )
         H3(
-            Modifier
-                .fontFamily(Fonts.ALSHAUSS)
-                .fontWeight(FontWeight.Medium)
-                .fontSize(24.px)
-                .color(colors.blackText)
+            Headline2TextStyle
+                .toModifier()
+                .margin(top = 24.px)
                 .toAttrs()
         ) {
             Text(name)
@@ -198,7 +196,6 @@ private fun Ca(
         P(
             BodyTextStyle
                 .toModifier()
-                .margin(top = 8.px)
                 .textAlign(TextAlign.Center)
                 .maxWidth(400.px)
                 .toAttrs()
@@ -354,25 +351,26 @@ private fun LeftSide() {
     val colors = ColorMode.current.toSitePalette()
     val ctx = rememberPageContext()
 
-    Column(Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .then(
+                if (breakpoint > Breakpoint.MD) Modifier.fillMaxSize()
+                else Modifier.fillMaxWidth().height(auto)
+            ),
+        verticalArrangement = if (breakpoint > Breakpoint.MD) Arrangement.Center else Arrangement.Top
+    ) {
         H1(
-            Modifier
-                .color(colors.blackText)
-                .fontFamily(Fonts.ALSHAUSS)
-                .fontWeight(FontWeight.Bold)
-                .fontSize(64.px)
-                .lineHeight(1.0)
+            Title1TextStyle
+                .toModifier()
+                .thenIf(condition = breakpoint <= Breakpoint.MD, other = Modifier.fontSize(48.px))
                 .toAttrs()
         ) {
             Text("Упрости себе жизнь в новом семестре")
         }
         P(
-            Modifier
-                .color(colors.blackText)
-                .fontFamily(Fonts.ALSHAUSS)
-                .fontWeight(FontWeight.Medium)
-                .lineHeight(1.0)
-                .fontSize(32.px)
+            MediumHeadline
+                .toModifier()
+                .margin(top = 32.px)
                 .toAttrs()
         ) {
             Text("Просматривайте расписание занятий в БГИТУ прямо из приложения")
@@ -380,7 +378,7 @@ private fun LeftSide() {
         Row(
             modifier = Modifier
                 .flexWrap(FlexWrap.Wrap)
-                .margin(top = 64.px)
+                .margin(top = 32.px)
                 .gap(16.px)
                 .align(
                     if (breakpoint <= Breakpoint.MD) Alignment.CenterHorizontally
@@ -434,7 +432,7 @@ private fun RightSide() {
             modifier = Modifier
                 .fillMaxSize()
                 .margin(
-                    top = if (compact) 64.px
+                    top = if (compact) 32.px
                     else 0.px
                 )
                 .align(
