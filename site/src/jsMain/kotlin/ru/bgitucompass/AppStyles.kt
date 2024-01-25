@@ -2,7 +2,6 @@ package ru.bgitucompass
 
 import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.FontWeight
-import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
@@ -81,7 +80,6 @@ val BodyTextStyle by ComponentStyle {
             .fontSize(20.px)
             .fontWeight(FontWeight.Normal)
             .color(SitePalettes.light.blackText)
-            .textAlign(TextAlign.Justify)
             .lineHeight(1.4)
             .margin(0.px)
     }
