@@ -35,7 +35,7 @@ fun Footer() {
         val linkContainerModifier = Modifier.fillMaxWidth().alignItems(AlignItems.Center).justifyItems(JustifyItems.Center)
 
         Box(linkContainerModifier) {
-            Column(Modifier.fillMaxWidth()) {
+            Column {
                 P(
                     BodyTextStyle.toModifier().fontWeight(FontWeight.SemiBold).toAttrs()
                 ) {
