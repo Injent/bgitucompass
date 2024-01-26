@@ -13,7 +13,6 @@ import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import org.jetbrains.compose.web.css.AlignItems
-import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.A
 import org.jetbrains.compose.web.dom.P
@@ -31,13 +30,12 @@ fun Footer() {
             .fillMaxWidth()
             .background(SitePalettes.light.backgroundVariant)
             .padding(32.px)
-            .gap(64.px)
             .minHeight(150.px)
     ) {
         val linkContainerModifier = Modifier.fillMaxWidth().alignItems(AlignItems.Center).justifyItems(JustifyItems.Center)
 
         Box(linkContainerModifier) {
-            Column(Modifier.maxWidth(70.percent)) {
+            Column(Modifier.fillMaxWidth()) {
                 P(
                     BodyTextStyle.toModifier().fontWeight(FontWeight.SemiBold).toAttrs()
                 ) {

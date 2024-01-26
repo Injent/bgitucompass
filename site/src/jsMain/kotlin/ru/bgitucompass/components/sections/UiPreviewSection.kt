@@ -155,11 +155,13 @@ private fun WidgetRightSide() {
             ) {
                 Text("Кастомизируемые виджеты")
             }
-            P(
-                BodyTextStyle
-                    .toAttrs()
-            ) {
-                Text("Доступно 3 темы для виджета:")
+            Column {
+                P(
+                    BodyTextStyle
+                        .toAttrs()
+                ) {
+                    Text("Доступно 3 темы для виджета:")
+                }
                 Ul(
                     BodyTextStyle
                         .toModifier()
@@ -176,7 +178,12 @@ private fun WidgetRightSide() {
                         Text("Динамическая (Android 13+)")
                     }
                 }
-                Text("Настройте прозрачность виджета и адаптируйте его к любым обоям и стилям благодаря гибким настройкам")
+                P(
+                    BodyTextStyle
+                        .toAttrs()
+                ) {
+                    Text("Настройте прозрачность виджета и адаптируйте его к любым обоям и стилям благодаря гибким настройкам")
+                }
             }
         }
     }
