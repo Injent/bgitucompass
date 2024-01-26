@@ -84,8 +84,7 @@ private fun NotificationLeftSide() {
                 BodyTextStyle
                     .toAttrs()
             ) {
-                Text("С помощью специальной функции в настройках вы можете включить постоянное уведомление. " +
-                        "Оно в течение учебного дня будет показывать информацию о текущей и следующей паре")
+                Text("Активируйте постоянные уведомления в настройках для отображения информации о текущей и следующей паре в течение учебного дня")
             }
         }
     }
@@ -144,7 +143,7 @@ private fun WidgetRightSide() {
         Column(
             Modifier
                 .width(
-                    if (breakpoint <= Breakpoint.MD) 100.percent else 70.percent
+                    if (breakpoint <= Breakpoint.MD) 100.percent else 72.percent
                 )
                 .align(Alignment.Center)
         ) {
@@ -161,7 +160,12 @@ private fun WidgetRightSide() {
                     .toAttrs()
             ) {
                 Text("Доступно 3 темы для виджета:")
-                Ul {
+                Ul(
+                    BodyTextStyle
+                        .toModifier()
+                        .margin(topBottom = 18.px)
+                        .toAttrs()
+                ) {
                     Li {
                         Text("Светлая")
                     }
@@ -172,8 +176,7 @@ private fun WidgetRightSide() {
                         Text("Динамическая (Android 13+)")
                     }
                 }
-                Text("Вы так же можете настроить прозрачность виджета. ")
-                Text("А из-за гибкости настроек, виджет подойдет под любые обои и стили")
+                Text("Настройте прозрачность виджета и адаптируйте его к любым обоям и стилям благодаря гибким настройкам")
             }
         }
     }

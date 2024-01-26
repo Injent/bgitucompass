@@ -51,7 +51,7 @@ fun HomePage() {
             .minHeight(100.percent)
             .background(colors.background)
     ) {
-        NavBar()
+        NavBar(Modifier.id("navbar"))
 
         val breakpoint = rememberBreakpoint()
         SimpleGrid(
@@ -149,20 +149,18 @@ private fun Questions(
                 .fillMaxSize()
                 .align(Alignment.CenterHorizontally)
             Question(
-                ask = "Будет ли приложение для IPhone?",
-                response = "К сожалению нет, у нас нет техники Apple и мы не можем разрабатывать под IPhone",
+                ask = "Будет ли приложение для iPhone?",
+                response = "К сожалению, мы не поддерживаем устройства Apple",
                 modifier = itemModifier
             )
             Question(
-                ask = "Есть ли у приложения регулярные обновления?",
-                response = "Да, каждое обновление содержит новые полезные функции для наших пользователей",
+                ask = "Будут ли регулярные обновления?",
+                response = "Каждое обновление включает новые полезные функции для наших пользователей",
                 modifier = itemModifier
             )
             Question(
                 ask = "Почему приложения нет в маркетах?",
-                response = "Санкции против России делают невозможным публикацию приложения в Google Play. " +
-                        "Почему же мы не рассматриваем платформу Rustore? " +
-                        "Потому что по многочисленным отзывам им никто не пользуется",
+                response = "Санкции против России мешают размещению на Google Play. Прочие магазины не рассматриваются из-за низкой популярности",
                 modifier = itemModifier
             )
         }
@@ -247,13 +245,13 @@ private fun WhatNext(modifier: Modifier = Modifier) {
             Ca(
                 src = "chart-line-up.svg",
                 name = "Только вперед",
-                label = "У нас есть еще множество незаконченных фишех. Оставайтесь с нами чтобы получить их",
+                label = "Откройте для себя наши предстоящие функции – следите за обновлениями",
                 modifier = modifier
             )
             Ca(
                 src = "messages-question.svg",
-                name = "Мы ждем ваши идеи",
-                label = "Вы можете предлагать свои идеи в телеграм ",
+                name = "Мы ждем ваших идей!",
+                label = "Отправляйте свои идеи через Telegram: ",
                 modifier = modifier,
                 link = "@koespe",
                 linkPath = "https://t.me/koespe"
@@ -261,7 +259,7 @@ private fun WhatNext(modifier: Modifier = Modifier) {
             Ca(
                 src = "bug.svg",
                 name = "Помогите улучшить приложение",
-                label = "Если вы столкнулись с ошибками, то пишите сюда ",
+                label = "Обнаружили ошибки? Сообщите нам: ",
                 modifier = modifier,
                 link = "@Injent",
                 linkPath = "https://t.me/Injent"
@@ -314,19 +312,19 @@ private fun InfoSection() {
             Ca(
                 src = "calendar-clock.svg",
                 name = "Актуальное расписание",
-                label = "Информация о расписании обновляется ежедневно с сайта вуза",
+                label = "Расписание обновляется ежедневно с официального сайта университета",
                 modifier = modifier
             )
             Ca(
                 src = "objects-column.svg",
                 name = "Удобный интерфейс",
-                label = "Вы можете просматривать расписание из приложения, виджета и даже уведомления",
+                label = "Просматривайте расписание через приложение, виджет или уведомления",
                 modifier = modifier
             )
             Ca(
                 src = "wifi-slash.svg",
                 name = "Офлайн доступ",
-                label = "Расписание сохраняется на вашем устройстве и доступно в режиме без интернета",
+                label = "Расписание сохраняется на устройстве и доступно без интернета",
                 modifier = modifier
             )
         }
@@ -373,7 +371,7 @@ private fun LeftSide() {
                 .margin(top = 32.px)
                 .toAttrs()
         ) {
-            Text("Просматривайте расписание занятий в БГИТУ прямо из приложения")
+            Text("Просматривайте расписание прямо через наше приложение или Телеграм")
         }
         Row(
             modifier = Modifier
@@ -385,21 +383,6 @@ private fun LeftSide() {
                     else Alignment.Start
                 )
         ) {
-            IconButton(
-                onClick = { ctx.router.navigateTo("https://bgitu-compass.ru/download") },
-            ) {
-                P(
-                    Modifier
-                        .fontFamily(Fonts.ALSHAUSS)
-                        .fontWeight(FontWeight.Medium)
-                        .fontSize(20.px)
-                        .lineHeight(0.9)
-                        .color(colors.whiteText)
-                        .toAttrs()
-                ) {
-                    Text("Скачать для Android")
-                }
-            }
             IconButton(
                 onClick = { ctx.router.navigateTo("https://t.me/bgitu_compass_bot") },
             ) {
@@ -413,6 +396,21 @@ private fun LeftSide() {
                         .toAttrs()
                 ) {
                     Text("Telegram Бот")
+                }
+            }
+            IconButton(
+                onClick = { ctx.router.navigateTo("https://bgitu-compass.ru/download") },
+            ) {
+                P(
+                    Modifier
+                        .fontFamily(Fonts.ALSHAUSS)
+                        .fontWeight(FontWeight.Medium)
+                        .fontSize(20.px)
+                        .lineHeight(0.9)
+                        .color(colors.whiteText)
+                        .toAttrs()
+                ) {
+                    Text("Скачать для Android")
                 }
             }
         }

@@ -19,13 +19,13 @@ import ru.bgitucompass.theme.Fonts
 import ru.bgitucompass.toSitePalette
 
 @Composable
-fun NavBar() {
+fun NavBar(modifier: Modifier = Modifier) {
     val colors = ColorMode.current.toSitePalette()
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier
+        horizontalArrangement = Arrangement.Center,
+        modifier = modifier
             .position(Position.Fixed)
             .top(0.px)
             .left(0.px)

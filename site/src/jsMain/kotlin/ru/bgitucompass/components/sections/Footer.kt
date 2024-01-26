@@ -26,7 +26,7 @@ import ru.bgitucompass.SitePalettes
 @Composable
 fun Footer() {
     SimpleGrid(
-        numColumns = numColumns(base = 1, md = 2),
+        numColumns = numColumns(base = 1, md = 1),
         modifier = Modifier
             .fillMaxWidth()
             .background(SitePalettes.light.backgroundVariant)
@@ -65,14 +65,14 @@ fun Footer() {
             }
         }
 
-        Box(linkContainerModifier) {
-            A(
-                attrs = FooterLinkTextStyle.toAttrs(),
-                href = "https://bgitu-compass.ru/userAgreement/"
-            ) {
-                Text("Пользовательское соглашение")
-            }
-        }
+//        Box(linkContainerModifier) {
+//            A(
+//                attrs = FooterLinkTextStyle.toAttrs(),
+//                href = "https://bgitu-compass.ru/userAgreement/"
+//            ) {
+//                Text("Пользовательское соглашение")
+//            }
+//        }
 
     }
 }
