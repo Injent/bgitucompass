@@ -2,7 +2,8 @@ package ru.bgitucompass.components.sections
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.ScrollBehavior
-import com.varabyte.kobweb.compose.foundation.layout.Box
+import com.varabyte.kobweb.compose.css.autoLength
+import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.ColumnScope
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -24,6 +25,7 @@ import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.*
 import ru.bgitucompass.BodyTextStyle
 import ru.bgitucompass.SmallHeadlineTextStyle
+import ru.bgitucompass.theme.Assets
 
 @Composable
 fun ColumnScope.UiPreviewSection() {
@@ -59,10 +61,13 @@ fun ColumnScope.UiPreviewSection() {
 @Composable
 private fun NotificationLeftSide() {
     val breakpoint = rememberBreakpoint()
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(auto),
+            .height(auto)
+            .padding(autoLength),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Column(
             Modifier
@@ -70,7 +75,6 @@ private fun NotificationLeftSide() {
                     if (breakpoint <= Breakpoint.MD) 100.percent else 70.percent
                 )
                 .margin(bottom = 32.px)
-                .align(Alignment.Center)
         ) {
             H3(
                 SmallHeadlineTextStyle
@@ -93,20 +97,21 @@ private fun NotificationLeftSide() {
 @Composable
 private fun NotificationRightSide() {
     val breakpoint = rememberBreakpoint()
-    Box(
+    Column(
         Modifier
             .fillMaxWidth()
             .margin(top = 64.px)
-            .height(auto)
+            .height(auto),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Image(
-            src = "notification.png",
+            src = Assets.NOTIFICATION,
             modifier = Modifier
                 .width(if (breakpoint <= Breakpoint.MD) 80.percent else 70.percent)
                 .maxHeight(520.px)
                 .height(auto)
                 .borderRadius(32.px)
-                .align(Alignment.Center)
         )
     }
 }
@@ -114,19 +119,20 @@ private fun NotificationRightSide() {
 @Composable
 private fun WidgetLeftSide() {
     val breakpoint = rememberBreakpoint()
-    Box(
+    Column(
         Modifier
             .fillMaxWidth()
-            .height(auto)
+            .height(auto),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Image(
-            src = "widget_preview.png",
+            src = Assets.WIDGET,
             modifier = Modifier
                 .width(if (breakpoint <= Breakpoint.MD) 80.percent else 70.percent)
                 .maxHeight(520.px)
                 .height(auto)
                 .borderRadius(32.px)
-                .align(Alignment.Center)
         )
     }
 }
@@ -135,17 +141,18 @@ private fun WidgetLeftSide() {
 private fun WidgetRightSide() {
     val breakpoint = rememberBreakpoint()
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .height(auto),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Column(
             Modifier
                 .width(
                     if (breakpoint <= Breakpoint.MD) 100.percent else 72.percent
                 )
-                .align(Alignment.Center)
         ) {
             H3(
                 SmallHeadlineTextStyle

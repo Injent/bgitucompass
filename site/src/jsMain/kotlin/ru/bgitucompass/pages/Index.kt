@@ -4,10 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import com.varabyte.kobweb.compose.css.CSSAnimation
 import com.varabyte.kobweb.compose.css.FontWeight
-import com.varabyte.kobweb.compose.css.ScrollBehavior
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
-import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -18,8 +16,6 @@ import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.graphics.Image
-import com.varabyte.kobweb.silk.components.layout.SimpleGrid
-import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
@@ -31,10 +27,10 @@ import org.jetbrains.compose.web.css.keywords.auto
 import org.jetbrains.compose.web.dom.*
 import ru.bgitucompass.*
 import ru.bgitucompass.components.sections.Footer
-import ru.bgitucompass.components.sections.NavBar
 import ru.bgitucompass.components.sections.UiPreviewSection
 import ru.bgitucompass.components.widgets.IconButton
-import ru.bgitucompass.theme.Dimens
+import ru.bgitucompass.theme.AppIcons
+import ru.bgitucompass.theme.Assets
 import ru.bgitucompass.theme.Fonts
 
 @Page
@@ -51,26 +47,39 @@ fun HomePage() {
             .minHeight(100.percent)
             .background(colors.background)
     ) {
-        NavBar(Modifier.id("navbar"))
-
         val breakpoint = rememberBreakpoint()
-        SimpleGrid(
-            numColumns = numColumns(base = 1,  md = 2),
+
+        CustomSimpleGrid(
             modifier = Modifier
-                .margin(top = Dimens.NAVBAR_HEIGHT.px)
-                .align(Alignment.CenterHorizontally)
                 .fillMaxWidth(
-                    if (breakpoint <= Breakpoint.MD) 100.percent
-                    else 1500.px
+                    if (breakpoint >= Breakpoint.MD) 1500.px
+                    else 100.percent
                 )
+                .height(auto)
                 .thenIf(breakpoint <= Breakpoint.MD) { Modifier.height(auto) }
                 .thenIf(breakpoint > Breakpoint.MD) { Modifier.height(100.vh) }
                 .padding(32.px)
-                .scrollBehavior(ScrollBehavior.Smooth)
-        ) {
-            LeftSide()
-            RightSide()
-        }
+                .align(Alignment.CenterHorizontally),
+            firstContent = {
+                Column(
+                    Modifier.flex(1).fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    LeftSide()
+                }
+            },
+            secondContent = {
+                Column(
+                    Modifier.flex(1).fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    RightSide()
+                }
+            }
+        )
+
         InfoSection()
         UiPreviewSection()
         WhatNext()
@@ -135,35 +144,39 @@ private fun Questions(
             Text("Часто задаваемые вопросы")
         }
 
-        SimpleGrid(
-            numColumns = numColumns(base = 1, md = 3),
-            modifier = modifier
-                .fillMaxWidth()
-                .align(Alignment.CenterHorizontally)
+        val itemModifier = Modifier
+            .fillMaxSize()
+            .align(Alignment.CenterHorizontally)
+        CustomSimpleGrid(
+            modifier = Modifier.fillMaxWidth()
                 .height(auto)
+                .padding(32.px)
                 .maxWidth(1500.px)
-                .gap(64.px)
-                .padding(32.px),
-        ) {
-            val itemModifier = Modifier
-                .fillMaxSize()
-                .align(Alignment.CenterHorizontally)
-            Question(
-                ask = "Будет ли приложение для iPhone?",
-                response = "К сожалению, мы не поддерживаем устройства Apple",
-                modifier = itemModifier
-            )
-            Question(
-                ask = "Будут ли регулярные обновления?",
-                response = "Каждое обновление включает новые полезные функции для наших пользователей",
-                modifier = itemModifier
-            )
-            Question(
-                ask = "Почему приложения нет в маркетах?",
-                response = "Санкции против России мешают размещению на Google Play. Прочие магазины не рассматриваются из-за низкой популярности",
-                modifier = itemModifier
-            )
-        }
+                .align(Alignment.CenterHorizontally),
+            itemModifier = Modifier
+                .gap(64.px),
+            firstContent = {
+                Question(
+                    ask = "Будет ли приложение для iPhone?",
+                    response = "К сожалению, мы не поддерживаем устройства Apple",
+                    modifier = itemModifier
+                )
+            },
+            secondContent = {
+                Question(
+                    ask = "Будут ли регулярные обновления?",
+                    response = "Каждое обновление включает новые полезные функции для наших пользователей",
+                    modifier = itemModifier
+                )
+            },
+            thirdContent = {
+                Question(
+                    ask = "Почему приложения нет в маркетах?",
+                    response = "Санкции против России мешают размещению на Google Play. Прочие магазины не рассматриваются из-за низкой популярности",
+                    modifier = itemModifier
+                )
+            }
+        )
     }
 }
 
@@ -176,7 +189,6 @@ private fun Ca(
     link: String? = null,
     linkPath: String = "",
 ) {
-    val colors = ColorMode.current.toSitePalette()
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -243,13 +255,13 @@ private fun WhatNext(modifier: Modifier = Modifier) {
         @Composable
         fun content(modifier: Modifier = Modifier) {
             Ca(
-                src = "chart-line-up.svg",
+                src = AppIcons.CHART,
                 name = "Только вперед",
                 label = "Откройте для себя наши предстоящие функции – следите за обновлениями",
                 modifier = modifier
             )
             Ca(
-                src = "messages-question.svg",
+                src = AppIcons.MESSAGES,
                 name = "Мы ждем ваших идей!",
                 label = "Отправляйте свои идеи через Telegram: ",
                 modifier = modifier,
@@ -257,7 +269,7 @@ private fun WhatNext(modifier: Modifier = Modifier) {
                 linkPath = "https://t.me/koespe"
             )
             Ca(
-                src = "bug.svg",
+                src = AppIcons.BUG,
                 name = "Помогите улучшить приложение",
                 label = "Обнаружили ошибки? Сообщите нам: ",
                 modifier = modifier,
@@ -310,19 +322,19 @@ private fun InfoSection() {
         @Composable
         fun content(modifier: Modifier = Modifier) {
             Ca(
-                src = "calendar-clock.svg",
+                src = AppIcons.CALENDAR,
                 name = "Актуальное расписание",
                 label = "Расписание обновляется ежедневно с официального сайта университета",
                 modifier = modifier
             )
             Ca(
-                src = "objects-column.svg",
+                src = AppIcons.OBJECTS,
                 name = "Удобный интерфейс",
                 label = "Просматривайте расписание через приложение, виджет или уведомления",
                 modifier = modifier
             )
             Ca(
-                src = "wifi-slash.svg",
+                src = AppIcons.WIFI,
                 name = "Офлайн доступ",
                 label = "Расписание сохраняется на устройстве и доступно без интернета",
                 modifier = modifier
@@ -353,10 +365,32 @@ private fun LeftSide() {
     val ctx = rememberPageContext()
 
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxWidth(),
         verticalArrangement = if (breakpoint > Breakpoint.MD) Arrangement.Center else Arrangement.Top
     ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .margin(bottom = 16.px)
+        ) {
+            Image(
+                src = Assets.LOGO,
+                modifier = Modifier
+                    .size(48.px)
+            )
+            P(
+                Modifier
+                    .color(colors.blue)
+                    .fontSize(40.px)
+                    .fontFamily(Fonts.ERMILOV)
+                    .margin(left = 16.px, right = 16.px)
+                    .toAttrs()
+            ) {
+                Text("БГИТУ Компас")
+            }
+        }
+
         H1(
             Title1TextStyle
                 .toModifier()
@@ -421,21 +455,19 @@ private fun LeftSide() {
 private fun RightSide() {
     val breakpoint = rememberBreakpoint()
 
-    val compact = breakpoint <= Breakpoint.MD
-    Box(
-        Modifier.fillMaxSize()
+    val compact = (breakpoint < Breakpoint.MD)
+    Column(
+        Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Image(
-            src = "home.png",
+            src = Assets.HOME,
             modifier = Modifier
                 .fillMaxSize()
                 .margin(
                     top = if (compact) 32.px
                     else 0.px
-                )
-                .align(
-                    if (compact) Alignment.TopCenter
-                    else Alignment.TopCenter
                 )
                 .maxWidth(
                     if (compact) 80.percent

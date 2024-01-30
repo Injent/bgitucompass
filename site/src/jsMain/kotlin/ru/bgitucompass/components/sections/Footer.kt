@@ -8,8 +8,6 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
-import com.varabyte.kobweb.silk.components.layout.SimpleGrid
-import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import org.jetbrains.compose.web.css.px
@@ -23,21 +21,18 @@ import ru.bgitucompass.SitePalettes
 
 @Composable
 fun Footer() {
-    SimpleGrid(
-        numColumns = numColumns(base = 1, md = 1),
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(SitePalettes.light.backgroundVariant)
             .padding(32.px)
-            .minHeight(150.px)
+            .minHeight(150.px),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
+        Column() {
             P(
-                BodyTextStyle.toModifier().fontWeight(FontWeight.SemiBold).toAttrs()
+                BodyTextStyle.toModifier().fontWeight(FontWeight.SemiBold).align(Alignment.CenterHorizontally).toAttrs()
             ) {
                 Text("Связь с разработчиками")
             }
@@ -57,7 +52,7 @@ fun Footer() {
             ) {
                 Text("Веревкин Елисей")
                 Span(BodyTextStyle.toAttrs()) {
-                    Text(" — Android приложение")
+                    Text(" — Приложениеь Android")
                 }
             }
         }

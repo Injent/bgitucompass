@@ -14,6 +14,7 @@ import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
+import ru.bgitucompass.theme.Assets
 import ru.bgitucompass.theme.Dimens.NAVBAR_HEIGHT
 import ru.bgitucompass.theme.Fonts
 import ru.bgitucompass.toSitePalette
@@ -36,7 +37,7 @@ fun NavBar(modifier: Modifier = Modifier) {
             .padding(left = 16.px),
     ) {
         Image(
-            src = "compass_logo.png",
+            src = Assets.LOGO,
             modifier = Modifier
                 .size(48.px)
         )
