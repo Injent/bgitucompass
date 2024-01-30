@@ -372,7 +372,7 @@ private fun LeftSide() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
-                .margin(bottom = 16.px)
+                .margin(bottom = 32.px)
         ) {
             Image(
                 src = Assets.LOGO,

@@ -1,6 +1,7 @@
+
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
 import kotlinx.html.link
-import org.gradle.internal.impldep.org.eclipse.jgit.transport.ReceiveCommand.link
+import kotlinx.html.meta
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -17,6 +18,7 @@ kobweb {
         index {
             head.add {
                 link(rel = "stylesheet", href = "/fonts/faces.css")
+                meta("Cache-Control", "no-cache")
             }
         }
     }
