@@ -17,7 +17,7 @@
 #### Payload:
 ```json
 {
-  "appId": "SHA256",
+  "appUuid": "SHA256",
   "groupId": 0
 }
 ```
