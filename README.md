@@ -129,6 +129,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...<br>
   "id": 31,
   "bio": "Да это я решаю",
   "fullName": "Алеков Алек Алекович или студент 1 При-101",
+  "role": "STUDENT | DEV | AWARDED",
   "contacts": {
     "tg": "t.me/oleg",
     "vk": "vk.com/oleg"
