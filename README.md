@@ -22,13 +22,13 @@
 ```
 {
   "authMethod": "VK | GOOGLE | TG",
-  "authCode": "все что угодно",
+  "idToken": "все что угодно",
   "fullName": "OLEG ALO" | null,
   "avatarUrl": "uri" | null
 }
 ```
 
-*authCode* - токен из апи авторизации VK или Google подтверждающий подленность отправленных данных.<br>
+*idToken* - токен из апи авторизации VK или Google подтверждающий подленность отправленных данных.<br>
 С помощью апи от Google и VK ты подтверждаешь токен у себя и если он правильный, то возвращаешь response иначе 403<br>
 
 *fullName* и avatarUrl могут быть null при типе авторизации TG, так как их может получить только сервер.
@@ -45,7 +45,7 @@
 
 # Сторонняя авторизация (TELEGRAM)
 
-Приложение стартует телеграм бота с параметром `start?=auth_code=UUID...`
+Приложение стартует телеграм бота с параметром `start?=idToken...`
 
 Сервер обрабатывает запрос, добавляя в таблицу auth_codes запись с id пользователя telegram (@injent или какой там формат id).<br>
 Запись будет хранится на протяжении 5 минут.<br>
@@ -58,13 +58,13 @@
 ```
 {
   "authMethod": "TG",
-  "authCode": "все что угодно"
+  "idToken": "все что угодно"
 }
 ```
 
-*authCode* из того самого диплинка на бота `start?=auth_code=UUID...`
+*authCode* из того самого диплинка на бота `start?=idToken...`
 
-Если authCode совпадает с таблицей, то по telegram id из нее получаешь имя пользователя и аватарку, отправляешь мне и удаляешь запись.
+Если idToken совпадает с таблицей, то по telegram id из нее получаешь имя пользователя и аватарку, отправляешь мне и удаляешь запись.
 
 > Response
 ```
@@ -147,5 +147,19 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...<br>
       "variant": 6
     }
   ]
+}
+```
+
+# Роут с версиями для авторизованных пользователей
+
+#### GET
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...<br>
+`account/dataVersions`<br>
+
+> Response
+```
+{
+  "scheduleVersion": 0,
+  "profileVersion": 0
 }
 ```
