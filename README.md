@@ -24,7 +24,8 @@
   "authMethod": "VK | GOOGLE | TG",
   "idToken": "все что угодно",
   "fullName": "OLEG ALO" | null,
-  "avatarUrl": "uri" | null
+  "avatarUrl": "uri" | null,
+  "externalUserId": 43141
 }
 ```
 
